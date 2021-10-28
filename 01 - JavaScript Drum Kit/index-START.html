@@ -59,14 +59,27 @@
 
 <script>
   window.addEventListener('keydown', function(e) {
-  const audio = document.querySelector(`audio[data-code="${e.code}"]`);
-  const key = document.querySelector(`div[data-code="${e.code}"]`);
-  console.log(key);
+    const audio = document.querySelector(`audio[data-code="${e.code}"]`);
+    const key = document.querySelector(`div[data-code="${e.code}"]`);
     if (!audio) return;
     audio.currentTime = 0;
     audio.play();
     key.classList.toggle('playing');
-    setTimeout(function(){ key.classList.toggle('playing') }, 250);
+
+    // Este metodo es independiente del tiempo del transition del css del boton.
+    setTimeout(function(){ key.classList.toggle('playing') }, 100);
+
+    // éste metodo depende del tiempo del transition determinado en CSS.
+    // Cuando termina la animación -> se sale la clase automaticamente. 
+    // const keys = document.querySelectorAll('.key');
+    // for (let key of keys){
+    //   key.addEventListener('transitionend', function(e) {
+    //     if (e.propertyName !== 'transform') return;
+    //     console.log(e.propertyName);
+    //     key.classList.remove('playing');
+    //   });
+    // }
+    
   });
 </script>
 
